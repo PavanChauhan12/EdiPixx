@@ -12,7 +12,6 @@ const image = document.getElementById("chosen-image");
 const downloadButton = document.getElementById("download-button");
 
 function resetFilter(){
-
     filterA.value = "0";
     filterB.value = "100";
     filterC.value = "0";
