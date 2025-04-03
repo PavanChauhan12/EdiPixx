@@ -3,61 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EdiPix</title>
+    <title>EdiPix - Image Editor</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <div class="wrapper">
-        <div class="editor">
-            <div class="filter">
-                <label for="blur">Blur</label>
-                <input type="range" id="blur" min="0" max="5" value="0" step="0.1">
-                <span class="range-value" id="blur-value">0%</span>
-            </div>
+    <div class="container">
+        <header>
+            <h1>EdiPix</h1>
+            <p>Professional Image Editor</p>
+        </header>
 
-            <div class="filter">
-                <label for="contrast">Contrast</label>
-                <input type="range" id="contrast" min="0" max="200" value="100">
-                <span class="range-value" id="contrast-value">100%</span>
-            </div>
+        <main class="editor-container">
+            <section class="controls">
+                <div class="filter-group">
+                    <div class="filter">
+                        <div class="filter-header">
+                            <label for="blur">Blur</label>
+                            <span class="value" data-unit="px">0</span>
+                        </div>
+                        <input type="range" id="blur" min="0" max="5" value="0" step="0.1">
+                    </div>
 
-            <div class="filter">
-                <label for="hue-rotate">Hue-Rotate</label>
-                <input type="range" id="hue-rotate" min="0" max="360" value="0">
-                <span class="range-value" id="hue-rotate-value">0%</span>
-            </div>
+                    <div class="filter">
+                        <div class="filter-header">
+                            <label for="contrast">Contrast</label>
+                            <span class="value" data-unit="%">100</span>
+                        </div>
+                        <input type="range" id="contrast" min="0" max="200" value="100">
+                    </div>
 
-            <div class="filter">
-                <label for="sepia">Sepia</label>
-                <input type="range" id="sepia" min="0" max="100" value="0">
-                <span class="range-value" id="sepia-value">0%</span>
-            </div>
+                    <div class="filter">
+                        <div class="filter-header">
+                            <label for="hue-rotate">Hue Rotate</label>
+                            <span class="value" data-unit="deg">0</span>
+                        </div>
+                        <input type="range" id="hue-rotate" min="0" max="360" value="0">
+                    </div>
 
-            <div class="flip-buttons">
-                <div class="flip-options">
-                    <input type="radio" name="flip" id="no-flip" checked>
-                    <label for="no-flip">No Flip</label>
-
-                    <input type="radio" name="flip" id="flip-x">
-                    <label for="flip-x">Horizontal Flip</label>
-
-                    <input type="radio" name="flip" id="flip-y">
-                    <label for="flip-y">Vertical Flip</label>
+                    <div class="filter">
+                        <div class="filter-header">
+                            <label for="sepia">Sepia</label>
+                            <span class="value" data-unit="%">0</span>
+                        </div>
+                        <input type="range" id="sepia" min="0" max="100" value="0">
+                    </div>
                 </div>
-            </div>
-        </div>
-        
-        <div class="result">
-            <figure class="image-container">
-                <img id="chosen-image">
-            </figure>
-            <input type="file" id="upload-button" accept="image/*">
-            <label for="upload-button">Choose an Image</label>
-            <button id="download-button">Download Image</button>
-        </div>
-    </div>
 
+                <div class="flip-controls">
+                    <h3>Flip</h3>
+                    <div class="flip-buttons">
+                        <button id="flip-x" class="flip-btn">Horizontal</button>
+                        <button id="flip-y" class="flip-btn">Vertical</button>
+                    </div>
+                </div>
+
+                <button id="reset" class="reset-btn">Reset All Filters</button>
+            </section>
+
+            <section class="preview">
+                <div class="image-container">
+                    <div class="placeholder" id="placeholder">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <circle cx="8.5" cy="8.5" r="1.5"/>
+                            <polyline points="21 15 16 10 5 21"/>
+                        </svg>
+                        <p>No image selected</p>
+                    </div>
+                    <img id="preview-image" src="" alt="Preview">
+                </div>
+                <div class="action-buttons">
+                    <input type="file" id="file-input" accept="image/*" hidden>
+                    <button id="upload-btn" class="primary-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="17 8 12 3 7 8"/>
+                            <line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                        Choose Image
+                    </button>
+                    <button id="download-btn" class="secondary-btn" disabled>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Download
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
