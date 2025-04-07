@@ -1,1 +1,95 @@
+:root {
+    --primary: #ec4899;
+    --primary-hover: #f472b6;
+    --bg-dark: #111827;
+    --bg-darker: #0f172a;
+    --bg-card: #1f2937;
+    --text-light: #f3f4f6;
+    --text-muted: #9ca3af;
+    --border-radius: 0.5rem;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    background: linear-gradient(135deg, var(--bg-dark), var(--bg-darker));
+    color: var(--text-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 300px;
+    background: var(--bg-card);
+    padding: 3rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.form-container {
+    display: none;
+}
+
+.form-container.active {
+    display: block;
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.75rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+input {
+    width: 100%;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border: 1px solid #374151;
+    background: #1f2937;
+    color: var(--text-light);
+    border-radius: var(--border-radius);
+    outline: none;
+}
+
+input::placeholder {
+    color: var(--text-muted);
+}
+
+button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background-color: var(--primary-hover);
+}
+
+.message {
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(red); /* or use red for errors */
+}
+
+
+span {
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    color: var(--text-muted);
+}
 
