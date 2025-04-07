@@ -49,3 +49,100 @@ function updateFilterValue(filterId, value) {
         .nextElementSibling;
     filterLabel.textContent = value;
 }
+
+// Apply filters to image
+function applyFilters() {
+    const filterString = `
+        blur(${filters.blur}px)
+        contrast(${filters.contrast}%)
+        hue-rotate(${filters.hueRotate}deg)
+        sepia(${filters.sepia}%)
+    `;
+    
+    const transform = `scale(${filters.flipX ? -1 : 1}, ${filters.flipY ? -1 : 1})`;
+    
+    previewImage.style.filter = filterString;
+    previewImage.style.transform = transform;
+}
+
+// Filter input event listeners
+Object.entries(filterInputs).forEach(([key, input]) => {
+    input.addEventListener('input', (e) => {
+        filters[key] = e.target.value;
+        updateFilterValue(input.id, e.target.value);
+        applyFilters();
+    });
+});
+
+// Flip controls
+flipXBtn.addEventListener('click', () => {
+    filters.flipX = !filters.flipX;
+    flipXBtn.classList.toggle('active');
+    applyFilters();
+});
+
+flipYBtn.addEventListener('click', () => {
+    filters.flipY = !filters.flipY;
+    flipYBtn.classList.toggle('active');
+    applyFilters();
+});
+
+
+
+// Reset filters
+resetBtn.addEventListener('click', () => {
+    filters = {
+        blur: 0,
+        contrast: 100,
+        hueRotate: 0,
+        sepia: 0,
+        flipX: false,
+        flipY: false
+    };
+
+    // Reset input values
+    Object.entries(filterInputs).forEach(([key, input]) => {
+        input.value = filters[key];
+        updateFilterValue(input.id, filters[key]);
+    });
+
+    // Reset flip buttons
+    flipXBtn.classList.remove('active');
+    flipYBtn.classList.remove('active');
+
+    applyFilters();
+});
+
+// Download image
+downloadBtn.addEventListener('click', () => {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = previewImage.naturalWidth;
+    canvas.height = previewImage.naturalHeight;
+
+    // Apply filters
+    ctx.filter = `
+        blur(${filters.blur}px)
+        contrast(${filters.contrast}%)
+        hue-rotate(${filters.hueRotate}deg)
+        sepia(${filters.sepia}%)
+    `;
+
+    // Handle flips
+    if (filters.flipX || filters.flipY) {
+        ctx.scale(filters.flipX ? -1 : 1, filters.flipY ? -1 : 1);
+        ctx.translate(
+            filters.flipX ? -canvas.width : 0,
+            filters.flipY ? -canvas.height : 0
+        );
+    }
+
+    ctx.drawImage(previewImage, 0, 0);
+
+    // Create download link
+    const link = document.createElement('a');
+    link.download = 'edited-image.png';
+    link.href = canvas.toDataURL();
+    link.click();
+});
