@@ -1,5 +1,6 @@
+// File: login.js
 const loginContainer = document.getElementById('login-container');
-// Removed duplicate declaration of signupContainer
+const signupContainer = document.getElementById('signup-container');
 const switchToSignup = document.getElementById('switch-to-signup');
 const switchToLogin = document.getElementById('switch-to-login');
 
