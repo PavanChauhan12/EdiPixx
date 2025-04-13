@@ -7,6 +7,7 @@ const downloadBtn = document.getElementById('download-btn');
 const resetBtn = document.getElementById('reset');
 const flipXBtn = document.getElementById('flip-x');
 const flipYBtn = document.getElementById('flip-y');
+const removeBgBtn = document.getElementById('remove-bg-btn');
 
 // Filter inputs
 const filterInputs = {
@@ -39,7 +40,9 @@ fileInput.addEventListener('change', (e) => {
             placeholder.style.display = 'none';
             if (localStorage.getItem('isLoggedIn') === 'true') {
                 downloadBtn.disabled = false;
-            }            
+            } 
+            
+            removeBgBtn.disabled = false;
         };
         reader.readAsDataURL(file);
     }
@@ -114,6 +117,48 @@ resetBtn.addEventListener('click', () => {
 
     applyFilters();
 });
+
+removeBgBtn.addEventListener('click', async () => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (!isLoggedIn) {
+        alert("Please login to use background removal.");
+        window.location.href = "login.html";
+        return;
+    }
+
+    if (!previewImage.src) return;
+
+    const apiKey = '744QuVViqibCNMohss6gqfuT'; // Replace with your key
+
+    removeBgBtn.textContent = 'Removing...';
+    removeBgBtn.disabled = true;
+
+    try {
+        const blob = await fetch(previewImage.src).then(res => res.blob());
+        const formData = new FormData();
+        formData.append('image_file', blob, 'image.png');
+
+        const res = await fetch('https://api.remove.bg/v1.0/removebg', {
+            method: 'POST',
+            headers: {
+                'X-Api-Key': apiKey
+            },
+            body: formData
+        });
+
+        const resultBlob = await res.blob();
+        const imgURL = URL.createObjectURL(resultBlob);
+        previewImage.src = imgURL;
+        applyFilters(); // re-apply filters
+    } catch (err) {
+        alert("Background removal failed.");
+        console.error(err);
+    }
+
+    removeBgBtn.textContent = '🧼 Remove Background';
+    removeBgBtn.disabled = false;
+});
+
 
 // Download image
 downloadBtn.addEventListener('click', () => {
