@@ -37,7 +37,9 @@ fileInput.addEventListener('change', (e) => {
             previewImage.src = reader.result;
             previewImage.style.display = 'block';
             placeholder.style.display = 'none';
-            downloadBtn.disabled = false;
+            if (localStorage.getItem('isLoggedIn') === 'true') {
+                downloadBtn.disabled = false;
+            }            
         };
         reader.readAsDataURL(file);
     }
@@ -115,13 +117,20 @@ resetBtn.addEventListener('click', () => {
 
 // Download image
 downloadBtn.addEventListener('click', () => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+    if (!isLoggedIn) {
+        alert("Please login to download your image.");
+        window.location.href = "login.html";
+        return;
+    }
+
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
 
     canvas.width = previewImage.naturalWidth;
     canvas.height = previewImage.naturalHeight;
 
-    // Apply filters
     ctx.filter = `
         blur(${filters.blur}px)
         contrast(${filters.contrast}%)
@@ -129,7 +138,6 @@ downloadBtn.addEventListener('click', () => {
         sepia(${filters.sepia}%)
     `;
 
-    // Handle flips
     if (filters.flipX || filters.flipY) {
         ctx.scale(filters.flipX ? -1 : 1, filters.flipY ? -1 : 1);
         ctx.translate(
@@ -140,7 +148,6 @@ downloadBtn.addEventListener('click', () => {
 
     ctx.drawImage(previewImage, 0, 0);
 
-    // Create download link
     const link = document.createElement('a');
     link.download = 'edited-image.png';
     link.href = canvas.toDataURL();
