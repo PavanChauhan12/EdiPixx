@@ -3,11 +3,24 @@ const loginContainer = document.getElementById('login-container');
 const signupContainer = document.getElementById('signup-container');
 const switchToSignup = document.getElementById('switch-to-signup');
 const switchToLogin = document.getElementById('switch-to-login');
+const continueFreeBtn = document.getElementById('continue-free');
+if (continueFreeBtn) {
+    continueFreeBtn.addEventListener('click', () => {
+        localStorage.setItem('isLoggedIn', 'false');
+        window.location.href = 'index.html';
+    });
+}
+
 
 let users = JSON.parse(localStorage.getItem('users')) || [];
 
 // Show login form by default
 loginContainer.classList.add('active');
+
+// Initialize login state if not present
+if (localStorage.getItem('isLoggedIn') === null) {
+    localStorage.setItem('isLoggedIn', 'false');
+}
 
 // Switch to signup form
 switchToSignup.addEventListener('click', () => {
@@ -75,6 +88,8 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
     const user = users.find(user => user.email === email && user.password === password);
     if (user) {
         showMessage(loginMessage, 'Login successful!');
+
+        localStorage.setItem('isLoggedIn', 'true');
 
         // Redirect to your main project page after a short delay
         setTimeout(() => {
