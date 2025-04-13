@@ -7,7 +7,8 @@ EdiPix is a lightweight, browser-based image editor that allows users to apply v
   - Blur adjustment (0-5px)
   - Contrast control (0-200%)
   - Hue rotation (0-360 degrees)
-  - Sepia effect (0-100%)
+  - Gray Scale effect (0-100%)
+  - Remove background from the image
 
   **Image Transformations:**
   - Horizontal flip
