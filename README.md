@@ -1,5 +1,6 @@
 ![logo_4](https://github.com/user-attachments/assets/bb57e39b-49fa-4040-806f-05b8c301d34a)
 <br>
+<br>
 EdiPix - Professional Image Editor
 
 EdiPix is a lightweight, browser-based image editor that allows users to apply various filters and transformations to their images in real-time. Built with vanilla JavaScript, it provides a modern, intuitive interface for quick image editing.
