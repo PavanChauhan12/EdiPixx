@@ -27,10 +27,10 @@ const presets = {
     vintage: { blur: 0.5, contrast: 90, hueRotate: 20, sepia: 60, brightness: 100 },
     cool: { blur: 0.2, contrast: 110, hueRotate: 200, sepia: 0, brightness: 100 },
     warm: { blur: 0.3, contrast: 120, hueRotate: 30, sepia: 30, brightness: 110 },
-    bw: { blur: 0, contrast: 100, hueRotate: 0, sepia: 0, brightness: 100, grayscale: 100 },
+    bw: { blur: 0, contrast: 100, hueRotate: 0, sepia: 100, brightness: 100, grayscale: 100 },
     modern: { blur: 0, contrast: 130, hueRotate: 0, sepia: 0, brightness: 105 },
     cinematic: { blur: 0.1, contrast: 140, hueRotate: -10, sepia: 20, brightness: 95 },
-    vibrant: { blur: 0, contrast: 150, hueRotate: 0, sepia: 0, brightness: 110 }
+    // vibrant: { blur: 0, contrast: 150, hueRotate: 0, sepia: 0, brightness: 110 }
 };
 
 // State
@@ -40,7 +40,6 @@ let filters = {
     contrast: 100,
     hueRotate: 0,
     sepia: 0,
-    grayscale: 0,
     flipX: false,
     flipY: false
 };
@@ -72,11 +71,11 @@ fileInput.addEventListener('change', (e) => {
             previewImage.src = reader.result;
             previewImage.style.display = 'block';
             placeholder.style.display = 'none';
-            
-            // Enable buttons when image is loaded
-            downloadBtn.disabled = false;
-            cropBtn.disabled = false;
-            removeBgBtn.disabled = false;
+            if (localStorage.getItem('isLoggedIn') === 'true') {
+                downloadBtn.disabled = false;
+                removeBgBtn.disabled = false;
+            }
+            cropBtn.disabled = false;   
         };
         reader.readAsDataURL(file);
     }
@@ -96,7 +95,6 @@ function applyFilters() {
         contrast(${filters.contrast}%)
         hue-rotate(${filters.hueRotate}deg)
         sepia(${filters.sepia}%)
-        grayscale(${filters.grayscale || 0}%)
     `;
     
     const transform = `scale(${filters.flipX ? -1 : 1}, ${filters.flipY ? -1 : 1})`;
@@ -144,7 +142,7 @@ presetButtons.forEach(button => {
     });
 });
 
-// Flip controls (keeping your original code)
+// Flip controls
 flipXBtn.addEventListener('click', () => {
     filters.flipX = !filters.flipX;
     flipXBtn.classList.toggle('active');
@@ -674,7 +672,7 @@ cropCancelBtn.addEventListener('click', cancelCrop);
 
 // Enhanced Cropping Functionality - End
 
-// Reset filters (keeping your original code)
+// Reset filters
 resetBtn.addEventListener('click', () => {
     filters = {
         brightness: 100,
@@ -682,7 +680,6 @@ resetBtn.addEventListener('click', () => {
         contrast: 100,
         hueRotate: 0,
         sepia: 0,
-        grayscale: 0,
         flipX: false,
         flipY: false
     };
@@ -697,7 +694,7 @@ resetBtn.addEventListener('click', () => {
 
     // Reset active classes
     presetButtons.forEach(btn => btn.classList.remove('active'));
-    
+
     // Reset flip buttons
     flipXBtn.classList.remove('active');
     flipYBtn.classList.remove('active');
@@ -705,7 +702,6 @@ resetBtn.addEventListener('click', () => {
     applyFilters();
 });
 
-// Background removal functionality (keeping your fixed code)
 removeBgBtn.addEventListener('click', async () => {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     if (!isLoggedIn) {
@@ -716,7 +712,7 @@ removeBgBtn.addEventListener('click', async () => {
 
     if (!previewImage.src) return;
 
-    const apiKey = '744QuVViqibCNMohss6gqfuT'; // Replace with your key
+    const apiKey = '744QuVViqibCNMohss6gqfuT'; // API key
 
     removeBgBtn.textContent = 'Removing...';
     removeBgBtn.disabled = true;
@@ -743,29 +739,35 @@ removeBgBtn.addEventListener('click', async () => {
         console.error(err);
     }
 
-    removeBgBtn.textContent = 'Remove Background';
+    removeBgBtn.textContent = '🧼 Remove Background';
     removeBgBtn.disabled = false;
 });
 
-// Download image (keeping your original code)
+
+// Download image
 downloadBtn.addEventListener('click', () => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+    if (!isLoggedIn) {
+        alert("Please login to download your image.");
+        window.location.href = "login.html";
+        return;
+    }
+
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
 
     canvas.width = previewImage.naturalWidth;
     canvas.height = previewImage.naturalHeight;
 
-    // Apply filters
     ctx.filter = `
         brightness(${filters.brightness}%)
         blur(${filters.blur}px)
         contrast(${filters.contrast}%)
         hue-rotate(${filters.hueRotate}deg)
         sepia(${filters.sepia}%)
-        grayscale(${filters.grayscale || 0}%)
     `;
 
-    // Handle flips
     if (filters.flipX || filters.flipY) {
         ctx.scale(filters.flipX ? -1 : 1, filters.flipY ? -1 : 1);
         ctx.translate(
