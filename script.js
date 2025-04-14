@@ -1,5 +1,3 @@
-// Improved Cropping Functionality
-
 // DOM Elements (keeping your original DOM elements)
 const previewImage = document.getElementById('preview-image');
 const placeholder = document.getElementById('placeholder');
