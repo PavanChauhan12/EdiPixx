@@ -185,6 +185,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     justify-content: center;
     min-height: 400px;
     overflow: hidden;
+    position: relative; /* Added to ensure crop selection is positioned correctly */
 }
 
 .placeholder {
@@ -243,4 +244,55 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .secondary-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+.preset-controls {
+    border-top: 1px solid #374151;
+    padding-top: 1.5rem;
+}
+
+.preset-controls h3 {
+    margin-bottom: 1rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.preset-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.5rem;
+}
+
+.preset-btn {
+    padding: 0.5rem;
+    background: #374151;
+    border: none;
+    border-radius: var(--border-radius);
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: capitalize;
+}
+
+.preset-btn.active,
+.preset-btn:hover {
+    background: var(--primary);
+}
+
+.image-container.cropping {
+    position: relative;
+    cursor: crosshair;
+}
+
+.crop-selection {
+    position: absolute;
+    border: 2px dashed var(--primary);
+    background: rgba(236, 72, 153, 0.2);
+    pointer-events: none;
+}
+
+.crop-buttons {
+    display: none; /* Will be toggled to 'flex' when cropping */
+    gap: 1rem;
+    justify-content: center;
 }
