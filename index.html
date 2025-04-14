@@ -10,13 +10,20 @@
     <div class="container">
         <header>
             <h1>EdiPix</h1>
-            <p>Professional Image Editor</p><br>
-            <p>(Login to download your edits.)</p>
+            <p>Professional Image Editor</p>
         </header>       
 
         <main class="editor-container">
             <section class="controls">
                 <div class="filter-group">
+                    <div class="filter">
+                        <div class="filter-header">
+                            <label for="brightness">Brightness</label>
+                            <span class="value" data-unit="%">100</span>
+                        </div>
+                        <input type="range" id="brightness" min="0" max="200" value="100">
+                    </div>
+
                     <div class="filter">
                         <div class="filter-header">
                             <label for="blur">Blur</label>
@@ -47,6 +54,19 @@
                             <span class="value" data-unit="%">0</span>
                         </div>
                         <input type="range" id="sepia" min="0" max="100" value="0">
+                    </div>
+                </div>
+
+                <div class="preset-controls">
+                    <h3>Presets</h3>
+                    <div class="preset-buttons">
+                        <button class="preset-btn" data-preset="vintage">Vintage</button>
+                        <button class="preset-btn" data-preset="cool">Cool</button>
+                        <button class="preset-btn" data-preset="warm">Warm</button>
+                        <button class="preset-btn" data-preset="bw">Black & White</button>
+                        <button class="preset-btn" data-preset="modern">Modern</button>
+                        <button class="preset-btn" data-preset="cinematic">Cinematic</button>
+                        <button class="preset-btn" data-preset="vibrant">Vibrant</button>
                     </div>
                 </div>
 
@@ -83,6 +103,16 @@
                         </svg>
                         Choose Image
                     </button>
+                    <button id="crop-btn" class="secondary-btn" disabled>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 2v14a2 2 0 0 0 2 2h14"/>
+                            <path d="M18 22V8a2 2 0 0 0-2-2H2"/>
+                        </svg>
+                        Crop
+                    </button>
+                    <button id="remove-bg-btn" class="secondary-btn" disabled>
+                        Remove Background
+                    </button>
                     <button id="download-btn" class="secondary-btn" disabled>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -91,9 +121,13 @@
                         </svg>
                         Download
                     </button>
-                    <!-- Remove background button -->
-                    <button id="remove-bg-btn" class="secondary-btn" disabled>
-                        Remove Background
+                </div>
+                <div class="crop-buttons">
+                    <button id="crop-confirm-btn" class="primary-btn">
+                        Confirm Crop
+                    </button>
+                    <button id="crop-cancel-btn" class="secondary-btn">
+                        Cancel
                     </button>
                 </div>
             </section>
