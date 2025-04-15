@@ -385,23 +385,43 @@ input[type="range"]::-webkit-slider-thumb:hover {
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
 
-
 #feedback-text {
     width: 100%;
-    margin: 1rem 0;
-    padding: 0.75rem;
+    margin: 1.5rem 0;
+    padding: 1rem;
     border-radius: var(--border-radius);
-    border: 1px solid #374151;
-    background: #1f2937;
+    border: 1px solid var(--border-color);
+    background: var(--bg-input);
     color: var(--text-light);
+    font-family: inherit;
+    resize: vertical;
+    min-height: 100px;
+    transition: border-color 0.2s ease;
+}
+
+#feedback-text:focus {
+    outline: none;
+    border-color: var(--primary);
 }
 
 #submit-feedback {
     background-color: var(--primary);
     color: white;
     border: none;
-    padding: 0.75rem 1.5rem;
+    padding: 0.85rem 1.75rem;
     border-radius: var(--border-radius);
     cursor: pointer;
-    font-weight: 500;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 4px 6px rgba(236, 72, 153, 0.2);
+}
+
+#submit-feedback:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(236, 72, 153, 0.3);
+}
+
+#submit-feedback:active {
+    transform: translateY(0);
 }
