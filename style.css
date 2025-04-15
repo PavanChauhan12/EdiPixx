@@ -320,16 +320,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
 
-.star-rating span {
-    font-size: 2rem;
-    color: gray;
-    cursor: pointer;
-    margin: 0 5px;
-}
-
-.star-rating .active {
-    color: gold;
-}
 
 #feedback-text {
     width: 100%;
