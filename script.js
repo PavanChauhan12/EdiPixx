@@ -13,6 +13,10 @@ const cropCancelBtn = document.getElementById('crop-cancel-btn');
 const imageContainer = document.querySelector('.image-container');
 const presetButtons = document.querySelectorAll('.preset-btn');
 const removeBgBtn = document.getElementById('remove-bg-btn');
+const feedbackDialog = document.getElementById('feedback-dialog');
+const stars = feedbackDialog.querySelectorAll('.star-rating span');
+const feedbackText = document.getElementById('feedback-text');
+const submitFeedback = document.getElementById('submit-feedback');
 
 // Filter inputs and presets (keeping your original code)
 const filterInputs = {
@@ -32,6 +36,8 @@ const presets = {
     cinematic: { blur: 0.1, contrast: 140, hueRotate: -10, sepia: 20, brightness: 95 },
     // vibrant: { blur: 0, contrast: 150, hueRotate: 0, sepia: 0, brightness: 110 }
 };
+
+let selectedRating = 0;
 
 // State
 let filters = {
@@ -782,4 +788,48 @@ downloadBtn.addEventListener('click', () => {
     link.download = 'edited-image.png';
     link.href = canvas.toDataURL();
     link.click();
+
+    // Show feedback dialog
+    setTimeout(showFeedbackDialog, 500);
 });
+
+// Star click logic
+stars.forEach(star => {
+    star.addEventListener('click', () => {
+        selectedRating = parseInt(star.dataset.star);
+        stars.forEach(s => s.classList.remove('active'));
+        for (let i = 0; i < selectedRating; i++) {
+            stars[i].classList.add('active');
+        }
+    });
+});
+
+// Submit feedback
+submitFeedback.addEventListener('click', () => {
+    const suggestion = feedbackText.value.trim();
+
+    if (selectedRating === 0) {
+        alert("Please select a star rating.");
+        return;
+    }
+
+    console.log("User Feedback:", {
+        rating: selectedRating,
+        suggestion: suggestion
+    });
+
+    feedbackDialog.style.display = 'none';
+    selectedRating = 0;
+    feedbackText.value = '';
+    stars.forEach(s => s.classList.remove('active'));
+
+    // alert("Thank you for your feedback!");
+
+    window.scrollTo(0, 0);
+    location.reload(top);
+});
+
+// Show modal after image download
+function showFeedbackDialog() {
+    feedbackDialog.style.display = 'flex';
+}
