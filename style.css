@@ -185,7 +185,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     justify-content: center;
     min-height: 400px;
     overflow: hidden;
-    position: relative; /* Added to ensure crop selection is positioned correctly */
+    position: relative;
 }
 
 .placeholder {
@@ -295,4 +295,58 @@ input[type="range"]::-webkit-slider-thumb:hover {
     display: none; /* Will be toggled to 'flex' when cropping */
     gap: 1rem;
     justify-content: center;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.star-rating span {
+    font-size: 2rem;
+    color: gray;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.star-rating .active {
+    color: gold;
+}
+
+#feedback-text {
+    width: 100%;
+    margin: 1rem 0;
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+    border: 1px solid #374151;
+    background: #1f2937;
+    color: var(--text-light);
+}
+
+#submit-feedback {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 500;
 }
