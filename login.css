@@ -82,3 +82,32 @@ input {
 input::placeholder {
     color: var(--text-muted);
 }
+button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+button:hover {
+    background-color: var(--primary-hover);
+}
+
+.message {
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(red); /* or use red for errors */
+}
+
+
+span {
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    color: var(--text-muted);
+}
