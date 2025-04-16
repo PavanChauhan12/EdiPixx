@@ -15,6 +15,7 @@
             <p>(Login to download your edits)</p>
         </header>       
 
+        //Adjustments
         <main class="editor-container">
             <section class="controls">
                 <div class="filter-group">
@@ -59,6 +60,7 @@
                     </div>
                 </div>
 
+                //Filters
                 <div class="preset-controls">
                     <h3>Presets</h3>
                     <div class="preset-buttons">
@@ -71,6 +73,7 @@
                     </div>
                 </div>
 
+                //Flipping image along x- and y- axis
                 <div class="flip-controls">
                     <h3>Flip</h3>
                     <div class="flip-buttons">
@@ -78,10 +81,12 @@
                         <button id="flip-y" class="flip-btn">Vertical</button>
                     </div>
                 </div>
-                
+
+                //Erase all modifications
                 <button id="reset" class="reset-btn">Reset All Filters</button>
             </section>
 
+            //Image block
             <section class="preview">
                 <div class="image-container">
                     <div class="placeholder" id="placeholder">
@@ -104,6 +109,8 @@
                         </svg>
                         Choose Image
                     </button>
+
+                    //Cropping button
                     <button id="crop-btn" class="secondary-btn" disabled>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M6 2v14a2 2 0 0 0 2 2h14"/>
@@ -111,9 +118,13 @@
                         </svg>
                         Crop
                     </button>
+
+                    //Background remover button
                     <button id="remove-bg-btn" class="secondary-btn" disabled>
                         Remove Background
                     </button>
+
+                    //Download button
                     <button id="download-btn" class="secondary-btn" disabled>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -134,6 +145,8 @@
             </section>
         </main>
     </div>
+
+    //Feedback block
     <div id="feedback-dialog" class="modal">
         <div class="modal-content">
             <h2>We'd love your feedback!</h2>
