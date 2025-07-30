@@ -67,5 +67,7 @@
    No build tools or dependencies required. It's 100% frontend-based.
 3. Sign-in and ENJOY!!
 
+---
+
 ## 🙌 Contribute
 Pull requests are welcome. If you have suggestions for features or improvements, feel free to open an issue or fork the repo and submit a PR!
