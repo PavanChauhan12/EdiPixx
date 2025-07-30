@@ -7,7 +7,7 @@ const continueFreeBtn = document.getElementById('continue-free');
 if (continueFreeBtn) {
     continueFreeBtn.addEventListener('click', () => {
         localStorage.setItem('isLoggedIn', 'false');
-        window.location.href = 'index.html';
+        window.location.href = 'editor.html';
     });
 }
 
@@ -93,7 +93,7 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
 
         // Redirect to your main project page after a short delay
         setTimeout(() => {
-            window.location.href = 'index.html';
+            window.location.href = 'editor.html';
         }, 1000);
     } else {
         showMessage(loginMessage, 'Invalid email or password!', true);
